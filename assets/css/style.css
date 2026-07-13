@@ -201,11 +201,21 @@ section{ position:relative; }
   display:none; flex-direction:column; gap:5px; background:none; border:none; padding:6px;
 }
 .hamburger span{ width:24px; height:2px; background: var(--navy); border-radius:2px; }
+.btn-label-short{ display:none; }
 
 @media (max-width: 1080px){
   .main-nav{ display:none; }
-  .nav-cta .btn-gold.desktop-only{ display:none; }
   .hamburger{ display:flex; }
+}
+
+/* Below 900px the bottom nav's "Menu" button is the single menu trigger,
+   so hide the header hamburger to avoid two menu controls on screen. */
+@media (max-width: 900px){
+  .hamburger{ display:none; }
+  .nav-trial-btn{ padding: 10px 16px; font-size:0.82rem; gap:0; }
+  .nav-trial-btn svg{ display:none; }
+  .btn-label-full{ display:none; }
+  .btn-label-short{ display:inline; }
 }
 
 /* Mobile drawer */
@@ -673,12 +683,18 @@ section{ position:relative; }
 .price-list svg{ width:16px; height:16px; color: var(--gold-dark); flex-shrink:0; margin-top:3px; }
 
 /* Fee table */
-.fee-table{ width:100%; border-collapse: collapse; margin-top:44px; background: var(--white); border-radius: var(--radius-md); overflow:hidden; box-shadow: var(--shadow-sm); }
-.fee-table th, .fee-table td{ padding: 16px 20px; text-align:left; font-size:0.92rem; }
+.fee-table{ width:100%; min-width:460px; border-collapse: collapse; margin-top:44px; background: var(--white); border-radius: var(--radius-md); overflow:hidden; box-shadow: var(--shadow-sm); }
+.fee-table th, .fee-table td{ padding: 16px 20px; text-align:left; font-size:0.92rem; white-space:nowrap; }
 .fee-table thead th{ background: var(--navy); color: var(--white); font-weight:600; }
 .fee-table tbody tr:nth-child(even){ background: var(--cream-2); }
-.fee-table tbody td:first-child{ font-weight:600; color: var(--navy); }
-.fee-table-wrap{ overflow-x:auto; }
+.fee-table tbody td:first-child{ font-weight:600; color: var(--navy); white-space:normal; }
+.fee-table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+@media (max-width: 560px){
+  .fee-table{ min-width:0; width:100%; table-layout:fixed; }
+  .fee-table th, .fee-table td{ padding: 10px 8px; font-size:0.76rem; white-space:normal; word-break:break-word; }
+  .fee-table th:first-child, .fee-table td:first-child{ width:38%; }
+}
 
 /* FAQ accordion */
 .faq-list{ max-width: 760px; margin: 44px auto 0; }
