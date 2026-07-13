@@ -411,6 +411,7 @@ section{ position:relative; }
   padding: 34px 30px; margin-top: 60px;
   display:grid; grid-template-columns: repeat(4,1fr);
 }
+.feature-strip.cols-5{ grid-template-columns: repeat(5,1fr); }
 .feature-strip .f-item{
   display:flex; align-items:center; gap:14px; padding: 0 20px;
   border-right: 1px solid rgba(255,255,255,0.12);
@@ -425,10 +426,10 @@ section{ position:relative; }
 .feature-strip p{ color: rgba(255,255,255,0.6); font-size:0.78rem; }
 
 @media (max-width: 900px){
-  .feature-strip{ grid-template-columns: 1fr 1fr; gap: 22px 0; }
+  .feature-strip, .feature-strip.cols-5{ grid-template-columns: 1fr 1fr; gap: 22px 0; }
   .feature-strip .f-item{ border-right:none; padding:0 10px; }
 }
-@media (max-width: 560px){ .feature-strip{ grid-template-columns: 1fr; } }
+@media (max-width: 560px){ .feature-strip, .feature-strip.cols-5{ grid-template-columns: 1fr; } }
 
 /* ==========================================================================
    CTA banner
@@ -484,6 +485,30 @@ section{ position:relative; }
 .section-head-row{ display:flex; align-items:flex-end; justify-content:space-between; gap: 20px; }
 .section-head-row .section-head{ margin:0; text-align:left; max-width:none; }
 .view-all{ color: var(--gold-dark); font-weight:600; font-size:0.9rem; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+
+/* ==========================================================================
+   Testimonials
+   ========================================================================== */
+.testimonial-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 26px; margin-top: 44px; }
+.testimonial-card{
+  background: var(--white); border:1px solid var(--cream-line); border-radius: var(--radius-md);
+  padding: 28px 26px;
+}
+.testimonial-stars{ display:flex; gap:3px; color: var(--gold); margin-bottom:16px; }
+.testimonial-stars svg{ width:16px; height:16px; }
+.testimonial-card p{ font-size:0.92rem; color: var(--ink); line-height:1.7; margin-bottom:20px; }
+.testimonial-person{ display:flex; align-items:center; gap:12px; }
+.testimonial-avatar{
+  width:44px; height:44px; border-radius:50%; flex-shrink:0;
+  background: linear-gradient(150deg,#DCEAE3,#B9D2C6);
+  display:flex; align-items:center; justify-content:center; color: var(--navy-soft);
+}
+.testimonial-avatar svg{ width:22px; height:22px; }
+.testimonial-person .name{ font-weight:600; font-size:0.9rem; color: var(--navy); }
+.testimonial-person .role{ font-size:0.78rem; color: var(--gray-light); }
+
+@media (max-width: 900px){ .testimonial-grid{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px){ .testimonial-grid{ grid-template-columns: 1fr; } }
 
 /* ==========================================================================
    Footer
