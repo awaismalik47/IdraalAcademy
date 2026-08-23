@@ -123,7 +123,12 @@ section{ position:relative; }
   background: var(--navy);
   color: rgba(255,255,255,0.85);
   font-size: 0.85rem;
+  overflow: hidden;
+  max-height: 60px;
+  opacity: 1;
+  transition: max-height .3s ease, opacity .25s ease;
 }
+.topbar.topbar-collapsed{ max-height:0; opacity:0; }
 .topbar .container{
   display:flex; align-items:center; justify-content:space-between;
   padding-top: 10px; padding-bottom: 10px;
@@ -587,9 +592,16 @@ section{ position:relative; }
   .mobile-bottomnav a{
     display:flex; flex-direction:column; align-items:center; gap:4px;
     padding: 9px 0 8px; color: var(--gray); font-size:0.68rem; font-weight:600;
+    transition: padding .25s ease;
   }
   .mobile-bottomnav a.active{ color: var(--gold-dark); }
-  .mobile-bottomnav svg{ width:19px; height:19px; }
+  .mobile-bottomnav svg{ width:19px; height:19px; transition: width .25s ease, height .25s ease; }
+
+  /* Scrolling down: icons grow. Scrolling up: icons shrink. */
+  .mobile-bottomnav.scroll-down a{ padding: 12px 0 11px; }
+  .mobile-bottomnav.scroll-down svg{ width:23px; height:23px; }
+  .mobile-bottomnav.scroll-up a{ padding: 6px 0 5px; }
+  .mobile-bottomnav.scroll-up svg{ width:15px; height:15px; }
 }
 
 /* ==========================================================================
@@ -700,6 +712,14 @@ section{ position:relative; }
 .team-card .role{ font-size:0.8rem; color: var(--gold-dark); font-weight:600; }
 
 /* Pricing */
+.currency-switcher{ display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:36px; }
+.curr-btn{
+  background: var(--white); border:1px solid var(--cream-line); color: var(--ink);
+  font-size:0.82rem; font-weight:600; padding:8px 20px; border-radius:50px;
+  cursor:pointer; transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.curr-btn:hover{ border-color: var(--gold); }
+.curr-btn.active{ background: var(--navy); border-color: var(--navy); color: var(--white); }
 .pricing-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: 26px; margin-top: 44px; }
 @media (max-width: 1100px){ .pricing-grid{ grid-template-columns: 1fr 1fr; } }
 @media (max-width: 620px){ .pricing-grid{ grid-template-columns: 1fr; max-width:440px; margin-left:auto; margin-right:auto; } }

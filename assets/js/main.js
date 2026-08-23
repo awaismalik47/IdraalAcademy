@@ -73,4 +73,84 @@ document.addEventListener('DOMContentLoaded', function () {
       else header.classList.remove('scrolled');
     });
   }
+
+  /* Top utility bar: collapses upward as soon as you scroll down, reappears on scroll up */
+  var topbar = document.querySelector('.topbar');
+  if (topbar) {
+    var lastTopbarY = window.scrollY;
+    var topbarTicking = false;
+
+    function updateTopbar() {
+      var currentY = window.scrollY;
+      var delta = currentY - lastTopbarY;
+
+      if (currentY < 10) {
+        topbar.classList.remove('topbar-collapsed');
+      } else if (delta > 4) {
+        topbar.classList.add('topbar-collapsed');
+      } else if (delta < -4) {
+        topbar.classList.remove('topbar-collapsed');
+      }
+      lastTopbarY = currentY;
+      topbarTicking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!topbarTicking) {
+        window.requestAnimationFrame(updateTopbar);
+        topbarTicking = true;
+      }
+    }, { passive: true });
+  }
+
+  /* Fee structure: currency switcher */
+  var currBtns = document.querySelectorAll('.curr-btn');
+  if (currBtns.length) {
+    var rates = { USD: 1, PKR: 278, GBP: 0.79, AED: 3.67, SAR: 3.75 };
+    var symbols = { USD: '$', PKR: 'Rs ', GBP: '£', AED: 'AED ', SAR: 'SAR ' };
+
+    currBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var currency = btn.dataset.currency;
+        currBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        document.querySelectorAll('.amount-value').forEach(function (el) {
+          var usd = parseFloat(el.dataset.usd);
+          var converted = usd * rates[currency];
+          var rounded = currency === 'PKR' ? Math.round(converted / 10) * 10 : Math.round(converted);
+          el.textContent = symbols[currency] + rounded.toLocaleString();
+        });
+      });
+    });
+  }
+
+  /* Mobile bottom nav: icons grow while scrolling down, shrink while scrolling up */
+  var bottomNav = document.querySelector('.mobile-bottomnav');
+  if (bottomNav) {
+    var lastScrollY = window.scrollY;
+    var ticking = false;
+
+    function updateNavSize() {
+      var currentY = window.scrollY;
+      var delta = currentY - lastScrollY;
+
+      if (delta > 4) {
+        bottomNav.classList.add('scroll-down');
+        bottomNav.classList.remove('scroll-up');
+      } else if (delta < -4) {
+        bottomNav.classList.add('scroll-up');
+        bottomNav.classList.remove('scroll-down');
+      }
+      lastScrollY = currentY;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNavSize);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 });
