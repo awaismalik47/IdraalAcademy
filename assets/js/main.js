@@ -106,8 +106,8 @@ document.addEventListener('DOMContentLoaded', function () {
   /* Fee structure: currency switcher */
   var currBtns = document.querySelectorAll('.curr-btn');
   if (currBtns.length) {
-    var rates = { USD: 1, PKR: 278, GBP: 0.79, AED: 3.67, SAR: 3.75 };
-    var symbols = { USD: '$', PKR: 'Rs ', GBP: '£', AED: 'AED ', SAR: 'SAR ' };
+    var rates = { USD: 1, CAD: 1.38, GBP: 0.79, AED: 3.67, AUD: 1.52, NZD: 1.66 };
+    var symbols = { USD: '$', CAD: 'CA$ ', GBP: '£', AED: 'AED ', AUD: 'A$ ', NZD: 'NZ$ ' };
 
     currBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -118,14 +118,14 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.amount-value').forEach(function (el) {
           var usd = parseFloat(el.dataset.usd);
           var converted = usd * rates[currency];
-          var rounded = currency === 'PKR' ? Math.round(converted / 10) * 10 : Math.round(converted);
+          var rounded = Math.round(converted);
           el.textContent = symbols[currency] + rounded.toLocaleString();
         });
       });
     });
   }
 
-  /* Mobile bottom nav: icons grow while scrolling down, shrink while scrolling up */
+  /* Mobile bottom nav: icons shrink while scrolling down, grow while scrolling up */
   var bottomNav = document.querySelector('.mobile-bottomnav');
   if (bottomNav) {
     var lastScrollY = window.scrollY;

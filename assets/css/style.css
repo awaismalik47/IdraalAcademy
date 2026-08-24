@@ -597,11 +597,11 @@ section{ position:relative; }
   .mobile-bottomnav a.active{ color: var(--gold-dark); }
   .mobile-bottomnav svg{ width:19px; height:19px; transition: width .25s ease, height .25s ease; }
 
-  /* Scrolling down: icons grow. Scrolling up: icons shrink. */
-  .mobile-bottomnav.scroll-down a{ padding: 12px 0 11px; }
-  .mobile-bottomnav.scroll-down svg{ width:23px; height:23px; }
-  .mobile-bottomnav.scroll-up a{ padding: 6px 0 5px; }
-  .mobile-bottomnav.scroll-up svg{ width:15px; height:15px; }
+  /* Scrolling down: icons shrink. Scrolling up: icons grow. */
+  .mobile-bottomnav.scroll-down a{ padding: 6px 0 5px; }
+  .mobile-bottomnav.scroll-down svg{ width:15px; height:15px; }
+  .mobile-bottomnav.scroll-up a{ padding: 12px 0 11px; }
+  .mobile-bottomnav.scroll-up svg{ width:23px; height:23px; }
 }
 
 /* ==========================================================================
